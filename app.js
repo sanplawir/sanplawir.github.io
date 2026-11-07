@@ -12,7 +12,8 @@ const projects = [
  {id:'remake',title:'Movie Scene Remake',type:'Scene remake',format:'MOVIE SCENE REMAKE',roles:['Editor','Key Grip'],categories:['film','editing'],link:drive('1ZaMFCCQZspyL-mcvyKBQ8TZJgkprkTcV'),file:'1ZaMFCCQZspyL-mcvyKBQ8TZJgkprkTcV',description:'A movie-scene remake with my contributions in editing and on-set grip work.'},
  {id:'music',title:'Experimental Music Films',type:'Music films',format:'EXPERIMENTAL MUSIC FILMS',roles:['Director','Concept Writer','Editor'],categories:['music','film','editing','writing'],link:'https://www.facebook.com/share/v/1LLAZDKyJk/',description:'Experimental music films combining my direction, concept writing, and editing.'},
  {id:'school',title:'School Project',type:'School project',format:'A PROJECT FROM THE CLASSROOM',roles:['Director','Concept Writer','Editor'],categories:['music','film','editing','writing'],link:drive('1iLq-ONddwBK5m4lNGkLeOZLR3hoM67YB'),file:'1iLq-ONddwBK5m4lNGkLeOZLR3hoM67YB',description:'A school project shared as part of my experimental music-film work.'},
- {id:'dubbing',title:'Dubbing Project',type:'Voice & edit',format:'DUBBING PROJECT',roles:['Editor','Voice Actor','Scriptwriter'],categories:['film','editing','writing'],link:drive('13Vt90Pvxafwkl7rOUYtAXjXY2ECEaatv'),file:'13Vt90Pvxafwkl7rOUYtAXjXY2ECEaatv',description:'A dubbing project combining my work in editing, voice acting, and scriptwriting.'}
+ {id:'dubbing',title:'Dubbing Project',type:'Voice & edit',format:'DUBBING PROJECT',roles:['Editor','Voice Actor','Scriptwriter'],categories:['film','editing','writing'],link:drive('13Vt90Pvxafwkl7rOUYtAXjXY2ECEaatv'),file:'13Vt90Pvxafwkl7rOUYtAXjXY2ECEaatv',description:'A dubbing project combining my work in editing, voice acting, and scriptwriting.'},
+ {id:'ikea',title:'Ikea Test / Motion Graphics',type:'Motion graphics',format:'MOTION GRAPHICS TEST',roles:['Motion Graphic Artist'],categories:['motion','editing'],link:'https://drive.google.com/file/d/1kQvcKOiUiEj1YDYoZblooIivWUxY2YjR/view?usp=drive_link',file:'1kQvcKOiUiEj1YDYoZblooIivWUxY2YjR',description:'An IKEA motion graphics test created in my role as Motion Graphic Artist.'}
 ];
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const artMarkup = (p,index) => {
@@ -22,6 +23,8 @@ const artMarkup = (p,index) => {
  return `<div class="project-art asset-art" aria-hidden="true">${image}<span class="asset-open">↗</span></div>`;
 };
 const grid=document.querySelector('#project-grid');
+document.querySelector('[data-filter="all"] sup').textContent=projects.length;
+document.querySelector('.filter-count').textContent=`${projects.length} PROJECTS`;
 grid.innerHTML=projects.map((p,i)=>`<article class="project-card" data-categories="${p.categories.join(' ')}" style="animation-delay:${Math.min(i*.04,.3)}s"><button class="project-open" data-project="${p.id}" aria-label="Explore ${escapeHTML(p.title)}">${artMarkup(p,i)}</button><div class="project-meta"><div><h3><a href="${p.link}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)} ↗</a></h3><p>${p.roles.map(escapeHTML).join(' / ')}</p></div><span class="project-type">${p.type}</span></div></article>`).join('');
 document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
  const filter=button.dataset.filter;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));let count=0;
